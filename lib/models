@@ -1,0 +1,18 @@
+class Video {
+    int clipId
+    String clipURL
+    String clipName
+
+    Video.fromJSON(Map<String> json) {
+        clipId = json['clipId']
+        clipURL = json['clipURL']
+        clipName = json['clipName']
+    }
+
+    Map<String> toJSON() {
+        json = Map<String>()
+        json['clipId'] = clipId
+        json['clipURL'] = clipURL
+        json['clipName'] = clipName
+    }
+}

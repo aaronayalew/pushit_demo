@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pushit_demo/screens/videos.dart';
+import 'package:pushit_demo/views/videos.dart';
 
 class EntrancePage extends StatefulWidget {
   const EntrancePage({
@@ -14,7 +14,10 @@ class _EntrancePageState extends State<EntrancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Pushit Demo")),
+      appBar: AppBar(
+        title: const Text("Pushit Demo"),
+        backgroundColor: Colors.white,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
