@@ -1,219 +1,42 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:pushit_demo/models/video.dart';
 
-class VideoRepo with ChangeNotifier {
-  List<Video> videos = [
-    Video(
-      clipId: 1,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 2,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 3,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 4,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 5,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 6,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 7,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 8,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 9,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 10,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 11,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 12,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 13,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 14,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 15,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 16,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 17,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 18,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 19,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 20,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 21,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 22,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 23,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 24,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 25,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-    Video(
-      clipId: 26,
-      clipName: "test",
-      clipURL:
-          "https://content.myactionreplay.com/replay207601.00348.1672942674.mp4",
-      clipThumb:
-          "http://content.myactionreplay.com/replay207601.00348.1672942674.mp4.jpg",
-    ),
-  ];
+//A class to handle fetching data from the API
+class VideoRepo with ChangeNotifier, DiagnosticableTreeMixin {
+  List<Video> _videos = [];
+  bool _isLoading = false;
 
-  List<Video> fetchVideos() {
-    return videos;
+  bool get isLoading => _isLoading;
+
+  List<Video> get videos => _videos;
+  String url = 'https://www.myactionreplay.com/api/clips';
+  Future<void> fetchVideos() async {
+    _isLoading = true;
+    notifyListeners();
+    Response resp = await post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: jsonEncode({
+          'marAuth': '5344333591ebe3c10594e1abf146b309',
+          'limit': '100',
+          'sessionID': '389482'
+        }));
+    List<Video> vids = [];
+    if (resp.statusCode == 200) {
+      //Iterate through all clips, Using the factory serialize the data.
+      jsonDecode(resp.body)['clips']
+          .forEach((v) => vids.add(Video.fromJSON(v)));
+    } else {
+      if (kDebugMode) {
+        ("!!!!!! ERROR: ${resp.statusCode}, Response: ${resp.body}");
+      }
+    }
+    _videos = vids;
+    _isLoading = false;
+    notifyListeners();
   }
 }

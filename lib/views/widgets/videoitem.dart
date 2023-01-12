@@ -1,5 +1,4 @@
 import 'package:cached_video_player/cached_video_player.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -15,14 +14,14 @@ class VideoItem extends StatefulWidget {
 
 class _VideoItemState extends State<VideoItem> {
   late CachedVideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
-
+  bool isFullScreen = false;
   @override
   void initState() {
     super.initState();
-    _controller = CachedVideoPlayerController.network(
-      widget.video.clipURL,
-    );
+    _controller = CachedVideoPlayerController.network(widget.video.clipURL,
+        videoPlayerOptions: VideoPlayerOptions(
+            mixWithOthers:
+                true)); // Option has to be like this inorder to avoid random stops.
     _controller.initialize().then((value) => setState((() {
           _controller.play();
         })));
@@ -33,34 +32,37 @@ class _VideoItemState extends State<VideoItem> {
   Widget build(BuildContext context) {
     return Center(
         child: _controller.value.isInitialized
-            ? VisibilityDetector(
-                key: Key('vid_${widget.video.clipId}'),
-                onVisibilityChanged: _handleVisibility,
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: Stack(children: [
-                    CachedVideoPlayer(_controller),
-                    _ControlsOverlay(controller: _controller),
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: VideoProgressIndicator(_controller,
-                            allowScrubbing: true))
-                  ]),
+            ? RotatedBox(
+                quarterTurns: isFullScreen ? 1 : 0,
+                child: VisibilityDetector(
+                  key: Key('vid_${widget.video.clipId}'),
+                  onVisibilityChanged: _handleVisibility,
+                  child: AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: GestureDetector(
+                      onDoubleTap: () {
+                        setState(() {
+                          isFullScreen
+                              ? isFullScreen = false
+                              : isFullScreen = true;
+                        });
+                      },
+                      child: Stack(children: [
+                        CachedVideoPlayer(_controller),
+                        _ControlsOverlay(
+                          controller: _controller,
+                        ),
+                        Align(
+                            alignment: Alignment.bottomCenter,
+                            child: VideoProgressIndicator(_controller,
+                                allowScrubbing: true))
+                      ]),
+                    ),
+                  ),
                 ),
               )
             : const Center(child: CircularProgressIndicator.adaptive()));
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   if (kDebugMode) {
-  //     print("============= Widget Visisble ====================");
-  //   }
-  //   setState(() {
-  //     _controller.play();
-  //   });
-  // }
 
   @override
   void dispose() {
@@ -68,10 +70,8 @@ class _VideoItemState extends State<VideoItem> {
     super.dispose();
   }
 
+  // Pause video when it's not showing and automatically start playing when it's showing again
   void _handleVisibility(VisibilityInfo info) {
-    print(
-        "============= Widget Visisble ==================== ${info.visibleFraction.toString()}");
-
     if (info.visibleFraction == 0) {
       if (_controller.value.isInitialized) {
         _controller.pause().then((value) {});

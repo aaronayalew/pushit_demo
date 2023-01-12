@@ -38,8 +38,8 @@ class _EntrancePageState extends State<EntrancePage> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => VideosPage()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const VideosPage()));
                   },
                   child: const Text("Go to videos page >>"))
             ],

@@ -1,3 +1,4 @@
+//Model for videos.
 class Video {
   int clipId = 0;
   String clipURL = "";
@@ -18,7 +19,7 @@ class Video {
   }
 
   Map<String, dynamic> toJSON() {
-    Map<String, dynamic> json = Map<String, dynamic>();
+    Map<String, dynamic> json = <String, dynamic>{};
     json['clipId'] = clipId;
     json['clipURL'] = clipURL;
     json['clipName'] = clipName;

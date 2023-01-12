@@ -36,11 +36,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  tiktoklikescroller: ^0.2.3
   video_player: ^2.4.10
   cached_video_player: ^2.0.3
   cached_network_image: ^3.2.3
   visibility_detector: ^0.3.3
+  http: ^0.13.5
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
