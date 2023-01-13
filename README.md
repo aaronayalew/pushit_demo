@@ -1,16 +1,12 @@
 # pushit_demo
 
-A new Flutter project.
+## Name: Aaron Ayalew 
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Application features:
+  - Entrance page with name and button to go to videos page
+  - Tiktok like scrolling on the videos page
+  - Play/Pause video by tapping video
+  - Seek bar to seek through the video
+  - Scrollbar for faster scrolling
+  - Double tap video to go to landscape mode
+  
