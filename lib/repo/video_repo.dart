@@ -8,7 +8,9 @@ import 'package:pushit_demo/models/video.dart';
 class VideoRepo with ChangeNotifier, DiagnosticableTreeMixin {
   List<Video> _videos = [];
   bool _isLoading = false;
+  bool _isFullScreen = false;
 
+  bool get isFullScreen => _isFullScreen;
   bool get isLoading => _isLoading;
 
   List<Video> get videos => _videos;
@@ -37,6 +39,15 @@ class VideoRepo with ChangeNotifier, DiagnosticableTreeMixin {
     }
     _videos = vids;
     _isLoading = false;
+    notifyListeners();
+  }
+
+  void toggleFullScreen() {
+    if (_isFullScreen) {
+      _isFullScreen = false;
+    } else {
+      _isFullScreen = true;
+    }
     notifyListeners();
   }
 }

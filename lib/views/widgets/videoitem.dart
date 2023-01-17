@@ -1,5 +1,7 @@
 import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pushit_demo/repo/video_repo.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../models/video.dart';
@@ -14,7 +16,6 @@ class VideoItem extends StatefulWidget {
 
 class _VideoItemState extends State<VideoItem> {
   late CachedVideoPlayerController _controller;
-  bool isFullScreen = false;
   @override
   void initState() {
     super.initState();
@@ -33,7 +34,7 @@ class _VideoItemState extends State<VideoItem> {
     return Center(
         child: _controller.value.isInitialized
             ? RotatedBox(
-                quarterTurns: isFullScreen ? 1 : 0,
+                quarterTurns: context.watch<VideoRepo>().isFullScreen ? 1 : 0,
                 child: VisibilityDetector(
                   key: Key('vid_${widget.video.clipId}'),
                   onVisibilityChanged: _handleVisibility,
@@ -41,11 +42,7 @@ class _VideoItemState extends State<VideoItem> {
                     aspectRatio: _controller.value.aspectRatio,
                     child: GestureDetector(
                       onDoubleTap: () {
-                        setState(() {
-                          isFullScreen
-                              ? isFullScreen = false
-                              : isFullScreen = true;
-                        });
+                        context.read<VideoRepo>().toggleFullScreen();
                       },
                       child: Stack(children: [
                         CachedVideoPlayer(_controller),

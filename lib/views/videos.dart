@@ -26,25 +26,27 @@ class _VideosPageState extends State<VideosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.black),
-            backgroundColor: Colors.white,
-            title: const Text(
-              "Videos",
-              style: TextStyle(color: Colors.black),
-            ),
-            elevation: 0,
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(6.0),
-              child: LinearProgressIndicator(
-                backgroundColor: Colors.transparent,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  context.watch<VideoRepo>().isLoading
-                      ? Theme.of(context).primaryColor
-                      : Colors.transparent,
+        appBar: !context.watch<VideoRepo>().isFullScreen
+            ? AppBar(
+                iconTheme: const IconThemeData(color: Colors.black),
+                backgroundColor: Colors.white,
+                title: const Text(
+                  "Videos",
+                  style: TextStyle(color: Colors.black),
                 ),
-              ),
-            )),
+                elevation: 0,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(6.0),
+                  child: LinearProgressIndicator(
+                    backgroundColor: Colors.transparent,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      context.watch<VideoRepo>().isLoading
+                          ? Theme.of(context).primaryColor
+                          : Colors.transparent,
+                    ),
+                  ),
+                ))
+            : null,
         body: context.watch<VideoRepo>().videos != []
             ? Scrollbar(
                 controller: _pageController,
@@ -57,8 +59,13 @@ class _VideosPageState extends State<VideosPage> {
                   controller: _pageController,
                   itemCount: context.watch<VideoRepo>().videos.length,
                   itemBuilder: (context, index) {
-                    return VideoItem(
-                      video: context.watch<VideoRepo>().videos[index],
+                    return Padding(
+                      padding: context.watch<VideoRepo>().isFullScreen
+                          ? const EdgeInsets.fromLTRB(10, 0, 10, 0)
+                          : const EdgeInsets.all(0),
+                      child: VideoItem(
+                        video: context.watch<VideoRepo>().videos[index],
+                      ),
                     );
                   },
                 ),
